@@ -11,7 +11,7 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     passport = models.CharField(max_length=20, unique=True)
     countryid = models.IntegerField()
-    approved = models.BooleanField()
+    # approved = models.BooleanField()
     
 
     def _str_(self):
