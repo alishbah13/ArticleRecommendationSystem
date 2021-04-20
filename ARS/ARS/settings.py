@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'import_export',
     'recsys',
 ]
 
@@ -124,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 LOGIN_REDIRECT_URL = 'index'
 
 STATICFILES_DIRS = [
@@ -131,6 +133,8 @@ STATICFILES_DIRS = [
 ]
 
 CRISPY_TEMPLATE_PACK="bootstrap4"
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

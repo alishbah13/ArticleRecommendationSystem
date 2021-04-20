@@ -2,13 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    username = models.CharField(max_length=30, unique=True)
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
-    email = models.CharField(max_length=80)
+class User_Detail(models.Model):
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.OneToOneField(User, max_length=30, on_delete=models.CASCADE)
+    # first_name = models.CharField(max_length=40)
+    # last_name = models.CharField(max_length=40)
+    # email = models.CharField(max_length=80)
+    # password = models.CharField(max_length=20)
     dob = models.DateField()
-    password = models.CharField(max_length=20)
     passport = models.CharField(max_length=20, unique=True)
     countryid = models.IntegerField()
     # approved = models.BooleanField()
@@ -32,7 +33,7 @@ class User_Search(models.Model):
     query = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
     results = models.TextField()
-    username = models.ForeignKey(User, related_name='Searches', on_delete=models.RESTRICT)
+    username = models.ForeignKey(User_Detail, related_name='Searches', on_delete=models.RESTRICT)
     
     def _str_(self):
         return self.query, self.username
