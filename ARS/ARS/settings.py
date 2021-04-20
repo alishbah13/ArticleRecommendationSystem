@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'recsys',
-    
-    # 'ARS.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [

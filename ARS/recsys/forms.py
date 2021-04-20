@@ -24,6 +24,3 @@ class SignUpForm(UserCreationForm):
                     'dob',
                     'passport',
                     'countryid',)
-                    # 'approved',
-                    # 'password',)
-                    # 'password1',)
