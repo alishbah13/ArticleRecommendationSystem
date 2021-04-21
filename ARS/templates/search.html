@@ -1,0 +1,16 @@
+{% extends 'base_accounts.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Search {% endblock %}
+
+{% block content %}
+<form type="GET" action="." value="{{request.GET.q}}" >
+    <div class="input-group">
+      <input id="search_text" type="text" name="q" value="{{request.GET.q}}" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" />
+      <button id="search_submit" type="submit" name="submit" value="Search" class="btn btn-primary">search</button>
+    </div>
+  </form>
+
+{% endblock %}

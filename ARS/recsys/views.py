@@ -7,9 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from recsys.models import User_Detail
+from recsys.models import User_Detail, Article
 from recsys.forms import SignUpForm
 from recsys.resources import ArticleResource
+from recsys.sim import d2v
 
 def index(request):
     if request.user.is_authenticated:
@@ -17,11 +18,20 @@ def index(request):
         a = 'alish'
         if request.method == 'GET': 
             search_query = request.GET.get('q')
-            quer = request.GET['q']
-            print(quer)
-            
+            if search_query:
+                quer = request.GET['q']
+                print(quer)
 
-        return render(request, 'home.html')
+                abst = list( Article.objects.all().values_list('abstract'))
+                p_ids = list( Article.objects.all().values_list('paper_id')) 
+                print('^^^^^^' , type(p_ids), type(p_ids[0]), '-------===========-------')
+
+                d2v(quer, abst, p_ids)
+            res = [''.join(i) for i in abst]
+            # print(res)
+            return render(request, 'search.html')
+        else:
+            return render(request, 'search.html')
     return render(request, 'home.html')
     # return 'Hello World!'
 
