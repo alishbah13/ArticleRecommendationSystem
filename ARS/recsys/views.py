@@ -14,7 +14,14 @@ from recsys.resources import ArticleResource
 def index(request):
     if request.user.is_authenticated:
         # return 'Hello world'
-        return render(request, 'test.html')
+        a = 'alish'
+        if request.method == 'GET': 
+            search_query = request.GET.get('q')
+            quer = request.GET['q']
+            print(quer)
+            
+
+        return render(request, 'home.html')
     return render(request, 'home.html')
     # return 'Hello World!'
 

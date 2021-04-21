@@ -51,10 +51,24 @@
       {% block content %}
       {% endblock %}
     </div>
-    <div class="container"> {{ user.username }} </div>
+    <div class="container"> 
+      
+      <form type="GET" action="." value="{{request.GET.q}}" >
+        <div class="input-group">
+          <input id="search_text" type="text" name="q" value="{{request.GET.q}}" class="form-control rounded" placeholder="Search" aria-label="Search"
+            aria-describedby="search-addon" />
+          <button id="search_submit" type="submit" name="submit" value="Search" class="btn btn-primary">search</button>
+        </div>
+      </form>
+
+
+
+    </div>
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>    
   </body>
 
 </html>
+
+
