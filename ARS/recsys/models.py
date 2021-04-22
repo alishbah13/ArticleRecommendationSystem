@@ -9,13 +9,8 @@ class User_Detail(models.Model):
     dob = models.DateField()
     passport = models.CharField(max_length=20, unique=True)
     countryid = models.IntegerField()
-    approved = models.BooleanField()
+    approved = models.BooleanField(default=False)
     
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-            instance.profile.save()
 
     def _str_(self):
         return self.username
@@ -31,7 +26,7 @@ class Article(models.Model):
         return self.paper_title
 
 class User_Search(models.Model):
-    search_id = models.IntegerField(unique=True)
+    search_id = models.IntegerField(unique=True, auto_created=True)
     query = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
     results = models.TextField()
