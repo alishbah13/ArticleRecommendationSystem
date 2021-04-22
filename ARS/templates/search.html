@@ -12,5 +12,26 @@
       <button id="search_submit" type="submit" name="submit" value="Search" class="btn btn-primary">search</button>
     </div>
   </form>
+  <h4> </h4>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Article Title</th>
+        <th>Abstract</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rec in recs %}
+        <tr>
+          <td class="align-middle">
+            <small> {{ rec.paper_title }} </small>
+          </td>
+          <td class="align-middle">
+            <small>{{ rec.abstract }} </small>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock %}

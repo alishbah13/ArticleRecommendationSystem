@@ -136,6 +136,8 @@ CRISPY_TEMPLATE_PACK="bootstrap4"
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

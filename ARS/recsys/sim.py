@@ -3,6 +3,8 @@ from nltk.stem import snowball
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
+from sklearn.metrics.pairwise import cosine_similarity 
+
 
 from collections import defaultdict
 import json
@@ -19,8 +21,6 @@ def d2v(query_abstract, db_abstract, db_ids):
     #preprocessing db
     db_abstract = [''.join(i) for i in db_abstract]
     db_abstract = [w.lower() for w in db_abstract]
-    # db_ids = [i[0] for i in db_ids]
-    # db_ids = list(db_ids)
     db = pd.DataFrame.from_records(db_ids, columns =['paper_id'])
     # print(df)
     
@@ -49,12 +49,15 @@ def d2v(query_abstract, db_abstract, db_ids):
     # Load the model
     model = Doc2Vec.load('model_docsimilarity.doc2vec')
 
-    #### INSTEAD USE COSINE 
-    # new_doc_vec = model.infer_vector(query, steps=50, alpha=0.25) /////// inference
+    query_vec = model.infer_vector(query, steps=50, alpha=0.25) #inference
     #use the most_similar utility to find the most similar documents.
-    # similars = model.docvecs.most_similar(positive=[new_doc_vec])  
-    # print(*similars, sep = "\n")
-    
+    similars = model.docvecs.most_similar(positive=[query_vec])  
+    recommendations = []
+    for i in similars:
+        recommendations.append(i[0])
+    # print(recommendations)
+
+    return recommendations
 
 
 
