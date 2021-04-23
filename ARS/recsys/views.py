@@ -17,43 +17,43 @@ from recsys.forms import SignUpForm
 from recsys.resources import ArticleResource
 from recsys.sim import d2v
 
+import datetime
+
 def index(request):
     if request.user.is_authenticated:
-        # print(request.user)
         # user = request.user
-        # print(user)
         # us = User_Detail.objects.filter(username=user.username).values('approved')
         # if us:
-         # return 'Hello world'
         if request.method == 'GET': 
             search_query = request.GET.get('q')
             if search_query:
                 quer = request.GET['q']
-                # print(quer)
+
                 abst = list( Article.objects.all().values_list('abstract'))
                 p_ids = list( Article.objects.all().values_list('paper_id')) 
 
-                curr =  User_Detail.objects.filter(username=request.user.username)
-                cuur_i = request.user.id
-
-                print('^^^^^^^^^^^^^^ ', curr, cuur_i)
-
+                curr =  User_Detail.objects.filter(username=request.user.id ).values('username')
                 recommendations = d2v(quer, abst, p_ids)
-                recs = []
-                art = Article.objects.filter(paper_id__in= recommendations )
-                # User_Search.objects.create(
-                #                         query=quer,
-                #                         results=art,
-                #                         username=)
+
+                t = []
+
+                recs = Article.objects.filter(paper_id__in= recommendations )
+                titles = art.values('paper_title')
+
+                for i in titles:
+                    t.append(i['paper_title'])
+
+                User_Search.objects.create(
+                                        query=quer,
+                                        time=datetime.datetime.now(),
+                                        results=t,
+                                        username=curr)
             else:
-                art = ''
-            return render(request, 'search.html', {'recs':art})
+                recs = ''
+            return render(request, 'search.html', {'recs':recs})
         else:
             return render(request, 'search.html')
-        # else:
-        #     return render(request, 'wait.html')
     return render(request, 'home.html')
-    # return 'Hello World!'
 
 def signup(request):
     if request.method == 'POST':
@@ -65,7 +65,7 @@ def signup(request):
             password = form.cleaned_data.get('password2')
             email = form.cleaned_data.get('email')
 
-            # return email
+
             if raw_password == password:
                 user = authenticate(username=username, password=raw_password)
                 User_Detail.objects.create(username=user,
@@ -86,8 +86,6 @@ def signup(request):
                 )
                 # email.send()
 
-                # login(request, user)
-                # return redirect('index')
                 return render(request, 'wait.html')
             else:
                 return render(request, 'register.html', {'form': form})

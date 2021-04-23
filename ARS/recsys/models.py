@@ -26,11 +26,10 @@ class Article(models.Model):
         return self.paper_title
 
 class User_Search(models.Model):
-    search_id = models.IntegerField(unique=True, auto_created=True)
     query = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
     results = models.TextField()
-    username = models.ForeignKey(User_Detail, related_name='Searches', on_delete=models.RESTRICT)
+    username = models.CharField( max_length=30 )
     
     def _str_(self):
         return self.query, self.username
