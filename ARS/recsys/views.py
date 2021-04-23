@@ -22,37 +22,37 @@ import datetime
 def index(request):
     if request.user.is_authenticated:
         # user = request.user
-        # us = User_Detail.objects.filter(username=user.username).values('approved')
-        # if us:
-        if request.method == 'GET': 
-            search_query = request.GET.get('q')
-            if search_query:
-                quer = request.GET['q']
+        us = User_Detail.objects.filter(username=request.user.id).values('approved')
+        if us:
+            if request.method == 'GET': 
+                search_query = request.GET.get('q')
+                if search_query:
+                    quer = request.GET['q']
 
-                abst = list( Article.objects.all().values_list('abstract'))
-                p_ids = list( Article.objects.all().values_list('paper_id')) 
+                    abst = list( Article.objects.all().values_list('abstract'))
+                    p_ids = list( Article.objects.all().values_list('paper_id')) 
 
-                curr =  User_Detail.objects.filter(username=request.user.id ).values('username')
-                recommendations = d2v(quer, abst, p_ids)
+                    curr =  User_Detail.objects.filter(username=request.user.id ).values('username')
+                    recommendations = d2v(quer, abst, p_ids)
 
-                t = []
+                    t = []
 
-                recs = Article.objects.filter(paper_id__in= recommendations )
-                titles = art.values('paper_title')
+                    recs = Article.objects.filter(paper_id__in= recommendations )
+                    titles = art.values('paper_title')
 
-                for i in titles:
-                    t.append(i['paper_title'])
+                    for i in titles:
+                        t.append(i['paper_title'])
 
-                User_Search.objects.create(
-                                        query=quer,
-                                        time=datetime.datetime.now(),
-                                        results=t,
-                                        username=curr)
+                    User_Search.objects.create(
+                                            query=quer,
+                                            time=datetime.datetime.now(),
+                                            results=t,
+                                            username=curr)
+                else:
+                    recs = ''
+                return render(request, 'search.html', {'recs':recs})
             else:
-                recs = ''
-            return render(request, 'search.html', {'recs':recs})
-        else:
-            return render(request, 'search.html')
+                return render(request, 'search.html')
     return render(request, 'home.html')
 
 def signup(request):
@@ -84,7 +84,7 @@ def signup(request):
                 email = EmailMessage(
                             mail_subject, message, to=[to_email]
                 )
-                # email.send()
+                email.send()
 
                 return render(request, 'wait.html')
             else:
