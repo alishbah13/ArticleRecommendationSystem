@@ -2,7 +2,7 @@
 
 Abstract:
 
-The rapid growth of scientific articles is creating a problem of information overload for the researchers. Due to which both novice and expert researchers find it very difficult to find relevant articles of their interest. Therefore, there is a need for an application that will be able to recommend similar articles to the researcher. To overcome this problem, we will develop a web- based scientific articles recommendations system that will recommend scientific articles of user interest based on text classification Doc2Vec modeling scheme and cosine similarity measure.
+The rapid growth of scientific articles is creating a problem of information overload for the researchers. Due to which both novice and expert researchers find it very difficult to find relevant articles of their interest. Therefore, there is a need for an application that will be able to recommend similar articles to the researcher. To overcome this problem, we will develop a web- based scientific articles recommendations system that will recommend scientific articles of user interest based on text classification Doc2Vec modeling scheme and a similarity measure.
 
 
 
