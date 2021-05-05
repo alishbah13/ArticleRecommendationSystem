@@ -138,8 +138,8 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'investflycorporation@gmail.com'
-EMAIL_HOST_PASSWORD = 'ProjectworK'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
